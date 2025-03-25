@@ -1,0 +1,178 @@
+/* Stile Generale */
+body {
+    font-family: 'Orbitron', sans-serif; /* Font futuristico */
+    margin: 0;
+    background-image: url('sfondo.jpg'); /* Sfondo personalizzato */
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Overlay per la Home */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.6), #000000 80%);
+    z-index: 0;
+}
+
+/* Contenitore Cyberpunk */
+.cyberpunk-container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+/* Stile del Titolo */
+.cyberpunk-title {
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff0066, #00ccff, #882bff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.cyberpunk-title:hover {
+    transform: scale(1.05);
+}
+
+/* Sottotitolo */
+.cyberpunk-subtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+}
+
+/* Pulsante Cyberpunk */
+.cyberpunk-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background: transparent;
+    border: 2px solid #00ccff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.cyberpunk-btn:hover {
+    background: #00ccff;
+    color: #000;
+    box-shadow: 0 0 20px #00ccff, 0 0 40px #00ccff;
+    transform: scale(1.1);
+}
+
+/* Animazione di transizione */
+#form-section .card, #results-section .card {
+    animation: slide-in 1s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes slide-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Grafici */
+/* Ridimensionamento Grafici */
+#radar-chart, #pie-chart {
+    max-width: 250px; /* Limita la dimensione dei grafici */
+    margin: 0 auto; /* Centra i grafici nel contenitore */
+}
+
+/* Layout Side-by-Side */
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Consente il passaggio a righe su schermi più piccoli */
+    justify-content: center; /* Centra i grafici orizzontalmente */
+    align-items: flex-start; /* Allinea graficamente in alto */
+    gap: 30px; /* Spaziatura tra i grafici */
+}
+
+/* Sezione Risultati */
+#results-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Titolo dei Risultati */
+#results-section h2 {
+    font-size: 2.5rem;
+    color: #00ccff;
+    text-shadow: 0 0 15px #00ccff, 0 0 30px #00ccff;
+    margin-bottom: 30px;
+}
+
+/* Animazione Radar Chart */
+@keyframes radar-glow {
+    0%, 100% {
+        box-shadow: 0 0 15px #00ccff, 0 0 30px #00ccff;
+    }
+    50% {
+        box-shadow: 0 0 30px #00ccff, 0 0 50px #00ccff;
+    }
+}
+
+#radar-chart:hover {
+    animation: radar-glow 2s infinite;
+}
+
+/* Hover del Pie Chart */
+#pie-chart:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 0 15px #ff0066, 0 0 30px #ff0066;
+}
+
+/* Cards delle Partite */
+#match-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Spaziatura tra le card */
+    margin-top: 30px;
+}
+
+.match-card {
+    background: white; /* Sfondo bianco per maggiore leggibilità */
+    color: #333; /* Testo scuro leggibile */
+    border: 1px solid #00ccff;
+    border-radius: 10px;
+    padding: 15px;
+    width: 280px;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.match-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00ccff, 0 0 30px #00ccff;
+}
+
+.match-card h4 {
+    color: #00ccff;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.match-card p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
