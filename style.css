@@ -75,7 +75,7 @@ body {
 }
 
 /* Animazione di transizione */
-#form-section .card, #results-section .card {
+#form-section .card, #results-section .card, #stats-section .card {
     animation: slide-in 1s ease-out forwards;
     opacity: 0;
     transform: translateY(30px);
@@ -89,90 +89,66 @@ body {
 }
 
 /* Grafici */
-/* Ridimensionamento Grafici */
-#radar-chart, #pie-chart {
-    max-width: 250px; /* Limita la dimensione dei grafici */
+#radar-chart, #pie-chart, #rank-progress-chart {
+    max-width: 400px; /* Dimensione del grafico responsivo */
     margin: 0 auto; /* Centra i grafici nel contenitore */
+    border-radius: 8px; /* Angoli arrotondati per un look moderno */
 }
 
 /* Layout Side-by-Side */
 .row {
     display: flex;
-    flex-wrap: wrap; /* Consente il passaggio a righe su schermi più piccoli */
-    justify-content: center; /* Centra i grafici orizzontalmente */
-    align-items: flex-start; /* Allinea graficamente in alto */
-    gap: 30px; /* Spaziatura tra i grafici */
+    flex-wrap: wrap;
+    justify-content: center; /* Centra gli elementi orizzontalmente */
+    align-items: flex-start; /* Allinea gli elementi in alto */
+    gap: 30px; /* Spaziatura tra gli elementi */
 }
 
 /* Sezione Risultati */
-#results-section {
+#results-section, #stats-section {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra elegante */
 }
 
-/* Titolo dei Risultati */
-#results-section h2 {
+/* Titolo delle Sezioni */
+#results-section h2, #stats-section h2 {
     font-size: 2.5rem;
     color: #00ccff;
     text-shadow: 0 0 15px #00ccff, 0 0 30px #00ccff;
     margin-bottom: 30px;
+    text-transform: uppercase; /* Migliora la leggibilità */
 }
 
-/* Animazione Radar Chart */
-@keyframes radar-glow {
-    0%, 100% {
-        box-shadow: 0 0 15px #00ccff, 0 0 30px #00ccff;
-    }
-    50% {
-        box-shadow: 0 0 30px #00ccff, 0 0 50px #00ccff;
-    }
-}
-
-#radar-chart:hover {
-    animation: radar-glow 2s infinite;
-}
-
-/* Hover del Pie Chart */
-#pie-chart:hover {
+/* Hover del Grafico Progressione Rank */
+#rank-progress-chart:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease-in-out;
-    box-shadow: 0 0 15px #ff0066, 0 0 30px #ff0066;
+    box-shadow: 0 0 15px #007bff, 0 0 30px #007bff;
 }
 
-/* Cards delle Partite */
-#match-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px; /* Spaziatura tra le card */
-    margin-top: 30px;
-}
-
-.match-card {
-    background: white; /* Sfondo bianco per maggiore leggibilità */
-    color: #333; /* Testo scuro leggibile */
-    border: 1px solid #00ccff;
-    border-radius: 10px;
-    padding: 15px;
-    width: 280px;
-    text-align: left;
-    box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
-    transition: transform 0.3s ease-in-out;
-}
-
-.match-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #00ccff, 0 0 30px #00ccff;
-}
-
-.match-card h4 {
-    color: #00ccff;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-}
-
-.match-card p {
-    margin: 5px 0;
+/* Statistiche Chiave */
+#key-stats {
+    list-style: none;
+    padding: 0;
     font-size: 1rem;
+    color: #333;
+    margin-top: 20px;
+}
+
+#key-stats li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Ombra leggera */
+    transition: background-color 0.3s ease;
+}
+
+#key-stats li:hover {
+    background: #e6e6e6; /* Colore di hover per un look interattivo */
 }
