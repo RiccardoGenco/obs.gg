@@ -7,7 +7,7 @@ const stopLoading =()  => {
  const startLoading =()  => {
     document.getElementById('loading-overlay').style.display = 'flex';
 }
-// Navigazione tra sezioni, scrollto così Betto è contento
+// Navigazione tra sezioni, scrollto così Betto è contento, ancora più contento
 document.getElementById('start-btn').addEventListener('click', () => {
     const formSection = document.getElementById('form-section');
 
