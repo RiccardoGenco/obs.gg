@@ -1,6 +1,13 @@
-API_KEY = 'RGAPI-e35dc902-dc2d-4400-94d4-d0e6bc920492';
-
-// Navigazione tra sezioni, scrollto così betto è contento
+API_KEY = 'RGAPI-7c70ee6c-973b-4ce8-bf5b-73b6db14261c';
+const stopLoading =()  => {
+    // Nascondi il loader
+    document.getElementById('loading-overlay').style.display = 'none';
+}
+ // Mostra il loader
+ const startLoading =()  => {
+    document.getElementById('loading-overlay').style.display = 'flex';
+}
+// Navigazione tra sezioni, scrollto così Betto è contento
 document.getElementById('start-btn').addEventListener('click', () => {
     const formSection = document.getElementById('form-section');
 
@@ -15,7 +22,6 @@ document.getElementById('start-btn').addEventListener('click', () => {
     }
 });
 
-
 // Gestione del form
 document.getElementById('riot-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -24,60 +30,72 @@ document.getElementById('riot-form').addEventListener('submit', async (e) => {
     const tag = document.getElementById('tag').value.trim();
     const rankedOnly = document.getElementById('ranked-only').checked;
 
-    document.getElementById('loading').style.display = 'block';
+   startLoading()
 
     try {
         const puuid = await fetchPUUID(gameName, tag);
         const matchDetails = await fetchMatchDetails(puuid, rankedOnly);
-        document.getElementById('loading').style.display = 'none';
+
+
+        // Nascondi la sezione del form
         document.getElementById('form-section').style.display = 'none';
+
+        // Mostra i risultati
         displayResults(puuid, matchDetails);
     } catch (error) {
-        document.getElementById('loading').style.display = 'none';
+      
         alert(error.message);
     }
+   stopLoading()
 });
 
 // Funzione per ottenere il PUUID
 async function fetchPUUID(gameName, tag) {
-    const puuidUrl = `https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tag}?api_key=${API_KEY}`;
-    const response = await fetch(puuidUrl);
-    if (!response.ok) {
-        throw new Error(`Errore nel recupero del PUUID: ${response.status}`);
+    try {
+        const puuidUrl = `https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tag}?api_key=${API_KEY}`;
+        const response = await fetch(puuidUrl);
+        if (!response.ok) {
+            throw new Error(`Errore nel recupero del PUUID: ${response.status}`);
+        }
+        const data = await response.json();
+        if (!data?.puuid) {
+            throw new Error("PUUID non trovato.");
+        }
+        return data.puuid;
+    } catch (error) {
+        throw new Error("Errore durante il recupero del PUUID. Dettagli: " + error.message);
     }
-    const data = await response.json();
-    if (!data?.puuid) {
-        throw new Error("PUUID non trovato.");
-    }
-    return data.puuid;
 }
 
 // Funzione per ottenere i dettagli delle partite
 async function fetchMatchDetails(puuid, rankedOnly) {
-    const matchIdUrl = `https://europe.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=30&api_key=${API_KEY}`;
-    const response = await fetch(matchIdUrl);
-    if (!response.ok) {
-        throw new Error(`Errore nel recupero dei match ID: ${response.status}`);
-    }
-    const matchIds = await response.json();
-    if (!Array.isArray(matchIds)) {
-        throw new Error("Impossibile recuperare l'elenco dei match ID.");
-    }
+    try {
+        const matchIdUrl = `https://europe.api.riotgames.com/tft/match/v1/matches/by-puuid/${puuid}/ids?start=0&count=30&api_key=${API_KEY}`;
+        const response = await fetch(matchIdUrl);
+        if (!response.ok) {
+            throw new Error(`Errore nel recupero dei match ID: ${response.status}`);
+        }
+        const matchIds = await response.json();
+        if (!Array.isArray(matchIds)) {
+            throw new Error("Impossibile recuperare l'elenco dei match ID.");
+        }
 
-    const matchDetails = [];
-    for (const matchId of matchIds) {
-        const matchDetailsUrl = `https://europe.api.riotgames.com/tft/match/v1/matches/${matchId}?api_key=${API_KEY}`;
-        const matchResponse = await fetch(matchDetailsUrl);
-        if (matchResponse.ok) {
-            const matchData = await matchResponse.json();
-            if (matchData?.info && (!rankedOnly || matchData.info.queue_id === 1100)) {
-                matchDetails.push(matchData);
+        const matchDetails = [];
+        for (const matchId of matchIds) {
+            const matchDetailsUrl = `https://europe.api.riotgames.com/tft/match/v1/matches/${matchId}?api_key=${API_KEY}`;
+            const matchResponse = await fetch(matchDetailsUrl);
+            if (matchResponse.ok) {
+                const matchData = await matchResponse.json();
+                if (matchData?.info && (!rankedOnly || matchData.info.queue_id === 1100)) {
+                    matchDetails.push(matchData);
+                }
             }
         }
+        return matchDetails;
+    } catch (error) {
+        throw new Error("Errore durante il recupero dei dettagli delle partite. Dettagli: " + error.message);
     }
-    return matchDetails;
 }
-
 // Funzione per mostrare i risultati
 function displayResults(puuid, matches) {
     const statsSection = document.getElementById('stats-section');

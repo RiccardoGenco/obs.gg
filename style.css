@@ -1,13 +1,45 @@
 /* Stile Generale */
 body {
-    font-family: 'Orbitron', sans-serif; /* Font futuristico */
+    font-family: 'Orbitron', sans-serif;
     margin: 0;
-    background-image: url('sfondo.jpg'); /* Sfondo personalizzato */
+    background-image: url('sfondo.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
     color: white;
     overflow-x: hidden;
+}
+
+/* Loader */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none; /* Nasconde il loader di default */
+    justify-content: center; /* Allinea orizzontalmente */
+    align-items: center; /* Allinea verticalmente */
+    z-index: 9999; /* Assicurati che il loader sia sopra tutti gli altri elementi */
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Overlay per la Home */
@@ -90,18 +122,18 @@ body {
 
 /* Grafici */
 #radar-chart, #pie-chart, #rank-progress-chart {
-    max-width: 400px; /* Dimensione del grafico responsivo */
-    margin: 0 auto; /* Centra i grafici nel contenitore */
-    border-radius: 8px; /* Angoli arrotondati per un look moderno */
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 8px;
 }
 
 /* Layout Side-by-Side */
 .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Centra gli elementi orizzontalmente */
-    align-items: flex-start; /* Allinea gli elementi in alto */
-    gap: 30px; /* Spaziatura tra gli elementi */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
 }
 
 /* Sezione Risultati */
@@ -109,7 +141,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra elegante */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Titolo delle Sezioni */
@@ -118,7 +150,7 @@ body {
     color: #00ccff;
     text-shadow: 0 0 15px #00ccff, 0 0 30px #00ccff;
     margin-bottom: 30px;
-    text-transform: uppercase; /* Migliora la leggibilità */
+    text-transform: uppercase;
 }
 
 /* Hover del Grafico Progressione Rank */
@@ -145,10 +177,10 @@ body {
     border-radius: 5px;
     text-align: left;
     font-size: 1.1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Ombra leggera */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
 }
 
 #key-stats li:hover {
-    background: #e6e6e6; /* Colore di hover per un look interattivo */
+    background: #e6e6e6;
 }
