@@ -1,17 +1,20 @@
 API_KEY = 'RGAPI-e35dc902-dc2d-4400-94d4-d0e6bc920492';
 
-// Navigazione tra sezioni
+// Navigazione tra sezioni, scrollto così betto è contento
 document.getElementById('start-btn').addEventListener('click', () => {
-    const homeSection = document.getElementById('home');
     const formSection = document.getElementById('form-section');
 
-    if (homeSection && formSection) {
-        homeSection.style.display = 'none';
+    if (formSection) {
         formSection.style.display = 'block';
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth'
+        });
     } else {
-        console.error('Errore: Sezioni non trovate. Verifica gli ID in HTML.');
+        console.error('Errore: Sezione non trovata. Verifica gli ID in HTML.');
     }
 });
+
 
 // Gestione del form
 document.getElementById('riot-form').addEventListener('submit', async (e) => {
@@ -144,7 +147,7 @@ function generateRankProgressionChart(labels, data) {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Progressione Rank',
+                label: 'Progressione',
                 data: data,
                 borderColor: '#007bff',
                 backgroundColor: 'rgba(0, 123, 255, 0.2)',
@@ -156,7 +159,7 @@ function generateRankProgressionChart(labels, data) {
             responsive: true,
             scales: {
                 y: {
-                    reverse: true,
+                    reverse: false,
                     beginAtZero: false,
                     ticks: {
                         stepSize: 1,
